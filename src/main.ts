@@ -1,11 +1,18 @@
 import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
+import {
+  FastifyAdapter,
+  NestFastifyApplication,
+} from '@nestjs/platform-fastify';
 import { AppModule } from './app.module';
 import { setupSwagger } from './config/swagger';
 import { setupValidation } from './config/validation-pipeline';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create<NestFastifyApplication>(
+    AppModule,
+    new FastifyAdapter(),
+  );
 
   setupSwagger(app);
   setupValidation(app);
@@ -13,7 +20,7 @@ async function bootstrap() {
   app.setGlobalPrefix('api');
   app.enableCors({ origin: '*' });
 
-  await app.listen(3000);
+  await app.listen(process.env.PORT || 3000, '0.0.0.0');
 
   const url = await app.getUrl();
   Logger.log(`Application is running on: ${url}/api`);
