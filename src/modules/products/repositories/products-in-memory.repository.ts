@@ -18,8 +18,9 @@ export const productsFactory = (length = 10): Product[] => {
     product.images = Array.from({ length: 3 }).map(() => {
       const image = new ProductImage();
       image.id = faker.string.uuid();
-      image.url = faker.image.urlLoremFlickr();
+      image.url = faker.image.urlLoremFlickr({ category: product.category });
       image.alt = faker.commerce.productName();
+      image.productId = product.id;
 
       return image;
     });

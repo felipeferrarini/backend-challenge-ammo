@@ -14,11 +14,11 @@ async function bootstrap() {
     new FastifyAdapter(),
   );
 
-  setupSwagger(app);
-  setupValidation(app);
-
   app.setGlobalPrefix('api');
   app.enableCors({ origin: '*' });
+
+  setupSwagger(app);
+  setupValidation(app);
 
   await app.listen(process.env.PORT || 3000, '0.0.0.0');
 

@@ -16,11 +16,13 @@ export class GetAllProductsUseCase {
   async execute(
     params?: PaginationQueryDto,
   ): Promise<PaginatedResponseDto<Product>> {
-    const { page = 1, itemsPerPage = 10 } = params || {};
+    const { page = 1, itemsPerPage = 10, search } = params || {};
 
     const { limit, products, total } = await this.productsRepository.findAll({
       skip: (page - 1) * itemsPerPage,
       take: itemsPerPage,
+      name: search,
+      description: search,
     });
 
     return {
