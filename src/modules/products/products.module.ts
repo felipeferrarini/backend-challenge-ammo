@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { PrismaModule } from 'src/common/database';
+import { PrismaModule } from '../../common/database';
 import { ProductsRepositoryToken } from './interfaces/products-repository.interface';
 import { ProductsController } from './products.controller';
 import { ProductsPrismaRepository } from './repositories/products-prisma.repository';

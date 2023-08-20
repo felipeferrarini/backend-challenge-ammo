@@ -1,4 +1,7 @@
-import { PaginatedResponseDto, PaginationQueryDto } from 'src/common/dto';
+import {
+  PaginatedResponseDto,
+  PaginationQueryDto,
+} from '../../../../common/dto';
 import { Product } from '../../entities/product.entity';
 import { ProductsRepository } from '../../interfaces/products-repository.interface';
 import {
